@@ -34,7 +34,7 @@ public class Login {
         this.firstName = firstName;
         this.lastName = lastName;
         
-    }
+    } 
     
     
     //Username must contain an underscore ('_') and must be <= 5 characters
@@ -69,7 +69,7 @@ public class Login {
             return "Cell number is incorrectly formatted or does not contain an international code, please correct the number and try again.";
         }
         
-        //Storethe user details for logging in later
+        //Store the user details for logging in later
         registeredUsername = username;
         registeredPassword = password;
         

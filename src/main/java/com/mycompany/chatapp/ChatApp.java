@@ -35,7 +35,7 @@ public class ChatApp {
                 JOptionPane.showMessageDialog(null, registrationMessage);
                 
                 //Proceed with logging in or to login
-                String usernameEntered = JOptionPane.showInputDialog("Login: Please enter the Username");
+                String usernameEntered = JOptionPane.showInputDialog("Login: Please enter the Username:");
                 String passwordEntered = JOptionPane.showInputDialog("Login: Please enter the Password:");
                 
                 boolean loginSuccess = log1.loginUser(usernameEntered, passwordEntered);
