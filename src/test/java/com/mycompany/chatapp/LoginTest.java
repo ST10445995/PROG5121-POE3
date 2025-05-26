@@ -32,7 +32,7 @@ public class LoginTest {
         Login log1 = new Login("kyl_1", "Ch&&sec@ke99!", "+27831234567", "Tshego", "Doe");
         assertTrue(log1.checkPasswordComplexity());
         
-        Login log2 = new Login("kyl_1", "password", "+27831234567", "Tshego", "Doe");
+        Login log2 = new Login("kyl!!!!!!!", "password", "+27831234567", "Tshego", "Doe");
         assertFalse(log2.checkPasswordComplexity());
     }
 
@@ -46,7 +46,7 @@ public class LoginTest {
         assertTrue(log1.checkCellPhoneNumber());
         
         //Invalid
-        Login log2 = new Login("kyl_1", "Test@1234", "08966553","Tshego","Doe");
+        Login log2 = new Login("kyle!!!!!!!", "Test@1234", "08966553","Tshego","Doe");
         assertFalse(log2.checkCellPhoneNumber());
     }
 

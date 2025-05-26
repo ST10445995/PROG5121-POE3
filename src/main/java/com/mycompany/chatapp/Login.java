@@ -7,11 +7,6 @@ package com.mycompany.chatapp;
 /**'.
  *
  * @author lab_services_student
- * 
- * References:
- * “ChatGPT.” Chatgpt.com, 2025, chatgpt.com/c/6806296a-6590-8001-80c9-c2e66c27bd00. Accessed 22 Apr. 2025.
- * Farrell, Joyce. Java Programming. 2025. Tenth Edition ed., Cengage Learning.
- * THE INDEPENDENT INSTITUTION OF EDUCATION. INTRODUCTION to PROGRAMMING LOGIC MODULE MANUAL 2024. FIRST EDITION: 2024 ed.,
  */
 public class Login {
     
@@ -50,7 +45,7 @@ public class Login {
                 password.matches(".*[!@#$%^&*(),.?\":{}|<>].*");
     }
     
-    //Cellphone number must be +27 and no more than 10 digits after the code
+    //Cellphone number must be +27 and no more than 9 digits after the code
     public boolean checkCellPhoneNumber() {
         return cellphone.matches("\\+27\\d{9}");
     }
@@ -92,3 +87,9 @@ public class Login {
     }
     
 }
+
+
+ //References:
+ //* “ChatGPT.” Chatgpt.com, 2025, chatgpt.com/c/6806296a-6590-8001-80c9-c2e66c27bd00. Accessed 22 Apr. 2025.//
+ //* Farrell, Joyce. Java Programming. 2025. Tenth Edition ed., Cengage Learning.//
+ //* THE INDEPENDENT INSTITUTION OF EDUCATION. INTRODUCTION to PROGRAMMING LOGIC MODULE MANUAL 2024. FIRST EDITION: 2024 ed.,//
