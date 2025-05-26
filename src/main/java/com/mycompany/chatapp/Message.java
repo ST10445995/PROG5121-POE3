@@ -47,8 +47,8 @@ public class Message {
     }
     
     //Ensures that the message ID  does not exceed ten characters 
-    private boolean checkMessageID() {
-        return String.valueOf(messageID).length()<= 10;
+    public boolean checkMessageID() {
+    return String.valueOf(messageID).length() <= 10;
     }
     
     //Validates the recipient phone number format
@@ -61,7 +61,16 @@ public class Message {
         String[] words = message.split("");
         return messageID/100000000 + "." + messageNumber + "." + (words.length > 0 ? words[0]: "") + (words.length > 1 ? words[words.length - 1]: "").toUpperCase();
     }
-    
+    // Checks if message length is within 250 characters
+    public String checkMessageLength() {
+        if (message.length() <= 250) {
+             return "Message ready to send.";
+    } else {
+        int excess = message.length() - 250;
+        return "Message exceeds 250 characters by " + excess + ", please reduce size.";
+    }
+}
+   
     //It handles message sending, storing and discarding 
     public String sentMessage(int option) {
         switch (option) {
@@ -106,6 +115,12 @@ public class Message {
 }
 }
 
+//References: “How to Generate a Random Number with JavaScript Math.” Www.youtube.com, www.youtube.com/shorts/3thJnyTZ99U. Accessed 25 May 2025.//
+//“YouTube.” Youtu.be, 2025, youtu.be/bvoGVoKcBa0?si=qMZCHN2__dGYeCgF. Accessed 25 May 2025.//
+//Youtu.be, 2025, youtu.be/cumxd5ed-uI?si=9mISsOVqW0vqRxvL. Accessed 3 Apr. 2025.//
+//THE INDEPENDENT INSTITUTION OF EDUCATION. INTRODUCTION to PROGRAMMING LOGIC MODULE MANUAL 2024. FIRST EDITION: 2024 ed., advtechonline.sharepoint.com/sites/TertiaryStudents/IIE%20Student%20Materials/Forms/Default%20View.aspx?id=%2Fsites%2FTertiaryStudents%2FIIE%20Student%20Materials%2FNew%20Student%20Materials%20CAT%2FIPRG5111%2F2024%2FIPRG5111MM%2Epdf&viewid=db15e059%2D4f93%2D487f%2Dabda%2De538b821c7b8&parent=%2Fsites%2FTertiaryStudents%2FIIE%20Student%20Materials%2FNew%20Student%20Materials%20CAT%2FIPRG5111%2F2024. Accessed 25 May. 2025.//
+//Farrell, Joyce. Java Programming. 2025. Tenth Edition ed., Cengage Learning.//
+//“ChatGPT.” Chatgpt.com, 2025, chatgpt.com/c/6834cc5d-5500-800f-be65-3024824af3c1. Accessed 26 May 2025.//
  
 
     

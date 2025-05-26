@@ -15,8 +15,6 @@ import java.io.File;
  */
 public class MessageTest {
 
-   public class MessageTest {
-
     private Message shortMessage;
     private Message longMessage;
     private Message hashMessage;
@@ -78,9 +76,9 @@ public class MessageTest {
     }
 
     @Test
-    public void testMessageIDGenerated() {
-        assertTrue(String.valueOf(shortMessage.checkMessageID()).length() <= 10);
-    }
+public void testMessageIDGenerated() {
+    assertTrue(shortMessage.checkMessageID(), "Message ID should be 10 digits or fewer.");
+}
 
     @Test
     public void testSentMessageOptions() {
@@ -99,4 +97,5 @@ public class MessageTest {
         assertTrue(file.exists(), "JSON file should be created.");
         assertTrue(file.length() > 0, "JSON file should contain content.");
     }
-}
+    
+   }
