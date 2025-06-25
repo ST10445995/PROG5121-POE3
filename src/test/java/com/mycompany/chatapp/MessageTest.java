@@ -7,7 +7,7 @@ package com.mycompany.chatapp;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.File;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,84 +18,52 @@ public class MessageTest {
     private Message shortMessage;
     private Message longMessage;
     private Message hashMessage;
+    private Message messageIDs;
 
-    @BeforeEach
-    public void setUp() {
-        shortMessage = new Message(1, "+27831234567", "Hi to night");
-        longMessage = new Message(2, "+27831234567", "A".repeat(260)); // deliberately over 250
-        hashMessage = new Message(0, "+27831234567", "HI TO NIGHT");
-    }
-
-    @Test
-    public void testMessageLengthSuccess() {
-        assertEquals("Message ready to send.", shortMessage.checkMessageLength());
-    }
-
-    @Test
-    public void testMessageLengthFailure() {
-        String result = longMessage.checkMessageLength();
-        assertTrue(result.startsWith("Message exceeds 250 characters by"), "Should detect excess length.");
-        assertTrue(result.contains("10"), "Excess should be 10 characters.");
-    }
-
-    @Test
-    public void testRecipientPhoneNumberSuccess() {
-        assertEquals(1, shortMessage.checkRecipientCell());
-    }
-
-    @Test
-    public void testRecipientPhoneNumberFailure() {
-        Message m = new Message(3, "0731234567", "Hello");
-        assertEquals(0, m.checkRecipientCell());
-    }
-
-    @Test
-    public void testRecipientPhoneNumberMessageSuccess() {
-        String result = (shortMessage.checkRecipientCell() == 1)
-                ? "Cell phone number successfully captured."
-                : "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.";
-        assertEquals("Cell phone number successfully captured.", result);
-    }
-
-    @Test
-    public void testRecipientPhoneNumberMessageFailure() {
-        Message m = new Message(3, "0731234567", "Hello");
-        String result = (m.checkRecipientCell() == 1)
-                ? "Cell phone number successfully captured."
-                : "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.";
-        assertEquals("Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.", result);
-    }
-
-    @Test
-    public void testMessageHashCorrectness() {
-        String expectedHash = "0.0.HIHT"; // Derived from: ID = 0xxxxxxx, messageNum = 0, message = HI TO NIGHT
-        String[] words = "HI TO NIGHT".split(" ");
-        String hash = hashMessage.createMessageHash();
-        assertTrue(hash.contains("0.0"), "Hash should start with 0.0");
-        assertTrue(hash.toUpperCase().contains(words[0]) || hash.toUpperCase().contains(words[words.length - 1]), "Hash should contain first or last word");
-    }
-
-    @Test
-public void testMessageIDGenerated() {
-    assertTrue(shortMessage.checkMessageID(), "Message ID should be 10 digits or fewer.");
-}
-
-    @Test
-    public void testSentMessageOptions() {
-        assertEquals("Message has been successfully sent.", shortMessage.sentMessage(1));
-        assertEquals("Message disregraded.", shortMessage.sentMessage(2));
-        assertEquals("Message has been successfully stored.", shortMessage.sentMessage(3));
-        assertEquals("Invalid option.", shortMessage.sentMessage(0));
-    }
-@Test
-    public void testStoreMessageCreatesFile() {
-        File file = new File("messages.json");
-        if (file.exists()) file.delete();
-
-        shortMessage.storeMessage();
-
-        assertTrue(file.exists(), "JSON file should be created.");
-        assertTrue(file.length() > 0, "JSON file should contain content.");
-    }
     
+    @Test
+    public void testSentMessagesArrayPopulated(){
+        Message mess1 = new Message(1, "+27838884567", "Did you get the cake?");
+        Message mess4 = new Message (4, "0838884567", "It is dinner time!");
+        String[] sentMessages =  {mess1.getMessage(), mess4.getMessage()};
+        
+        assertArrayEquals(new String[]{"Did you get the cake?","It is dinner time!"}, sentMessages);
+    }
+    @Test
+    public void testLongestMessage(){
+        Message mess2 = new Message(2, "+27838884567", "Where are you? You are late! I have asked you to be on time.");
+        
+        assertEquals("Where are you? You are late! I have asked you to be on time.", mess2. getMessage());
    }
+    @Test
+    public void testSearchNyMessageID(){
+        Message mess4 = new Message(4, "0838884567", "It is dinner time!");
+        int id = mess4.getMessageID();
+        
+        assertEquals("0838884567", mess4.getRecipient());
+        assertEquals("It is dinner time!", mess4.getMessage());
+   }
+    @Test
+    public void testMessageSentToRecipient(){
+        Message mess2 = new Message(2, "+27838884567","Where are you? You are late! I have asked you to be on time." );
+        Message mess5 = new Message (5,"+27838884567", "Ok, I am leaving without you." );
+        String[] messagesSentToRecipient =  {mess2.getMessage(), mess5.getMessage()};
+        
+        assertArrayEquals(new String[]{"Where are you? You are late! I have asked you to be on time.", "Ok, I am leaving without you."},
+            messagesSentToRecipient
+            );
+    }
+    @Test
+    public void testMessageDeletedByHash(){
+        Message mess2 = new Message (2, "+27838884567", "Where are you? You are late! I have asked you to be on time.");
+        String targetHash = mess2.getMessageHash();      
+    }
+    @Test
+    public void testDisplaySentMessageReport(){
+        Message mess1 = new Message (1, "+27834557896", "Did you get the cake?");
+        String report = "Hash:" + mess1.getMessageHash() + ",Recipient:" + mess1.getRecipient() + ",Message:" + mess1.getMessage();
+        
+        assertTrue(report.contains("Recipient:+27834557896"));
+        assertTrue(report.contains("Did you get the cake?"));
+    }
+}

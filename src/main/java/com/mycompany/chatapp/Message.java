@@ -113,6 +113,27 @@ public class Message {
         JOptionPane.showMessageDialog(null, "Error storing message: " + e.getMessage());
     }
 }
+
+    public int getMessageID() {
+        return messageID;
+    }
+
+    public int getMessageNumber() {
+        return messageNumber;
+    }
+
+    public String getRecipient() {
+        return recipient;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getMessageHash() {
+        return messageHash;
+    }
+    
 }
 
 //References: “How to Generate a Random Number with JavaScript Math.” Www.youtube.com, www.youtube.com/shorts/3thJnyTZ99U. Accessed 25 May 2025.//
